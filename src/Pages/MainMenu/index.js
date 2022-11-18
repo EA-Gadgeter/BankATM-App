@@ -13,7 +13,6 @@ const MainMenu = () => {
             <div className="headerMenu">
                 <h1>Bienvenido Usuario!</h1> {/*Aquí irá una var con el nombre del Usuario*/}
                 <p>Número de Cuenta: </p> {/*Aquí irá el número de cuenta del usuario*/}
-
             </div>
             <p className="opSelected">Seleccione la opción deseada.</p>
             <div className="menuButtons">
