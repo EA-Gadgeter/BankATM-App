@@ -1,10 +1,12 @@
 import React from "react";
-import {AppUI} from "./AppUI";
+import {LogInForm} from "../Pages/LogInForm";
+import {Route, Routes} from "react-router-dom";
 
 const App = () => {
-
     return(
-        <AppUI/>
+        <Routes>
+            <Route path="/" element={<LogInForm />}/>
+        </Routes>
     );
 };
 

@@ -4,7 +4,7 @@ import "./LogInForm.css"
 const LogInForm = () => {
 
     return(
-        <React.Fragment>
+        <div className="container">
             <form>
                 <p>¡Bienvenido a <span>Sintindir!</span></p>
                 <label className="cardLabel">Número de tarjeta</label>
@@ -13,7 +13,7 @@ const LogInForm = () => {
                 <input type="text" minLength="4" maxLength="4" className="nipInput"/>
                 <button type="submit">Ingresar</button>
             </form>
-        </React.Fragment>
+        </div>
     );
 };
 
