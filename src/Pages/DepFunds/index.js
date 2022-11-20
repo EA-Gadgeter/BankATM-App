@@ -1,4 +1,5 @@
 import React from "react";
+import { CancelButton } from "../../Components/CancelButton";
 import "./DepFunds.css";
 
 
@@ -14,9 +15,7 @@ const DepFunds = () =>{
                     <input type="submit" value="Enviar" className="dep-funds-submit"/>
                 </form>
             </div>
-            <div className="exit-button">
-                <button>Cancelar</button>
-            </div>
+            <CancelButton/>
         </div>
     );
 };
