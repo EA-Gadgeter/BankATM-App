@@ -1,4 +1,5 @@
 import React from "react";
+import { CancelButton } from "../../Components/CancelButton";
 import "./DepFunds.css";
 
 
@@ -15,10 +16,8 @@ const DepFunds = () =>{
                 </form>
 
             </div>
-            <div className="exit-button">
-                <button>Cancelar</button>
+            <CancelButton/>
 
-            </div>
 
         </div>
 
