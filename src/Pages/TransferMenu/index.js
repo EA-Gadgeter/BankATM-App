@@ -1,6 +1,6 @@
 import React from "react";
 import "./TransferMenu.css";
-
+import {CancelButton} from "../../Components/CancelButton"
 
 const TransferMenu = () =>{
     return(
@@ -15,11 +15,7 @@ const TransferMenu = () =>{
                 </form>
 
             </div>
-            <div className="exit-button">
-                <button>Cancelar</button>
-
-            </div>
-
+            <CancelButton/>
         </div>
 
 
