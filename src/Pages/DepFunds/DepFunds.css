@@ -11,31 +11,36 @@
 .text-Dep{
     width: 100%;
     height: 10rem;
-    padding-bottom: 7rem;
-    background-color: white;
+
+    background-color: red;
+    color: white;
 
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-
+    font-size: 2.8rem;
+    font-weight: 700;
 
 }
 
 .inputDep{
     width: 100%;
     height: 60%;
-    background-color: red;
+    max-height: 500px;
+
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
 
+
 }
 
 .inputDep form{
-    width: 40%;
+    width: 90%;
+    max-width: 350px;
     height: 90%;
-    max-height: 50rem;
 
     display: flex;
     justify-content: center;
@@ -49,7 +54,7 @@
 }
 
 .moneyDep{
-    width: 60%;
+    width: 85%;
     height: 10%;
 
     margin: 4rem;
@@ -106,7 +111,16 @@ button:hover {
 
 @media (min-width: 550px) {
 
-    .menuButtons {
-        width: 50rem;
+    .text-Dep{
+        background-color: white;
+        color: black;
+    }
+
+    .inputDep{
+        background-color: red;
+    }
+
+    .inputDep form{
+        width: 40%;
     }
 }

@@ -6,7 +6,7 @@ const DepFunds = () =>{
     return(
         <div className="depFunds">
             <div className="text-Dep">
-                <h1>Ingrese el monto a depositar</h1>
+                <p>Ingrese el monto a depositar</p>
             </div>
             <div className="inputDep">
                 <form>
