@@ -1,16 +1,16 @@
 import React from "react";
-import "./DepFunds.css";
+import "./TransferMenu.css";
 
 
-const DepFunds = () =>{
+const TransferMenu = () =>{
     return(
         <div className="depFunds">
             <div className="text-Dep">
-                <p>Ingrese el monto a depositar</p>
+                <p>Ingrese el monto a transferir</p>
             </div>
             <div className="inputDep">
                 <form>
-                    <input type="number" placeholder="Ingrese su monto a depositar" className="moneyDep"/>
+                    <input type="number" placeholder="Ingrese su monto a transferir" className="moneyDep"/>
                     <input type="submit" value="Enviar" className="dep-funds-submit"/>
                 </form>
 
@@ -26,4 +26,4 @@ const DepFunds = () =>{
     );
 };
 
-export {DepFunds}
+export {TransferMenu}
