@@ -1,6 +1,6 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import './CancelButton.css'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import './CancelButton.css';
 
 export const CancelButton = () => {
   return (

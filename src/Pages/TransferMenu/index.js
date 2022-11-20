@@ -1,7 +1,6 @@
 import React from "react";
 import "./TransferMenu.css";
 
-
 const TransferMenu = () =>{
     return(
         <div className="depFunds">

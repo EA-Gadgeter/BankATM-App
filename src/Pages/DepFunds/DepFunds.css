@@ -84,31 +84,6 @@
     background-color: #45a049;
 }
 
-.exit-button{
-    display: flex;
-    justify-content: center;
-    align-items:center;
-
-    flex-direction: column;
-}
-
-.exit-button button {
-    border: 0.1rem solid rgba(128, 128, 128, 0.48);
-    border-radius: 5rem;
-
-    background-color: #FFFFFF;
-    width: 10rem;
-    height: 4rem;
-
-    font-family: 'Noto Sans Display', sans-serif;
-    font-size: 1.5rem;
-}
-
-button:hover {
-    background-color: #EC0000;
-
-}
-
 @media (min-width: 550px) {
 
     .text-Dep{
