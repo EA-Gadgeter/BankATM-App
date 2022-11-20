@@ -13,17 +13,12 @@ const DepFunds = () =>{
                     <input type="number" placeholder="Ingrese su monto a depositar" className="moneyDep"/>
                     <input type="submit" value="Enviar" className="dep-funds-submit"/>
                 </form>
-
             </div>
             <div className="exit-button">
                 <button>Cancelar</button>
-
             </div>
-
         </div>
-
-
     );
 };
 
-export {DepFunds}
+export {DepFunds};

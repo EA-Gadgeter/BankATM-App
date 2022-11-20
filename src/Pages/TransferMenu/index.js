@@ -17,9 +17,7 @@ const TransferMenu = () =>{
             </div>
             <div className="exit-button">
                 <button>Cancelar</button>
-
             </div>
-
         </div>
 
 

@@ -11,9 +11,10 @@ const App = () => {
         <Routes>
             <Route path="/" element={<LogInForm />}/>
             <Route path="/menu" element={<MainMenu />}/>
-            <Route path="/dep-funds" element={<DepFunds/>}/>
-            <Route path="/transfer-menu" element={<TransferMenu/>}/>
+            <Route path="/dep-funds" element={<DepFunds />}/>
+            <Route path="/transfer-menu" element={<TransferMenu />}/>
             <Route path="/transaction" element={<Transaction />}/>
+            <Route path="*" element={<h1>Page Not Found</h1>}/>
         </Routes>
     );
 };
