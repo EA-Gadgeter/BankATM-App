@@ -1,7 +1,7 @@
 import React from "react";
 import Cards from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css'
-import { CancelButton } from "../../Components/CancelButton";
+import {MenuButton} from "../../Components/MenuButton";
 import "./CheckFunds.css";
 
 const CheckFunds = () => {
@@ -26,7 +26,7 @@ const CheckFunds = () => {
 
                 </div>
                 <div className="exit-button">
-                    <CancelButton/>
+                    <MenuButton text="Continuar"/>
                 </div>
                 <div className="menu-button">
                     <button>Salir</button>
