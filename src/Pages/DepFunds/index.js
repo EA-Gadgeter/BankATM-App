@@ -1,7 +1,6 @@
 import React from "react";
-import { CancelButton } from "../../Components/CancelButton";
+import { MenuButton } from "../../Components/MenuButton";
 import "./DepFunds.css";
-
 
 const DepFunds = () =>{
     return(
@@ -12,10 +11,10 @@ const DepFunds = () =>{
             <div className="inputDep">
                 <form>
                     <input type="number" placeholder="Ingrese su monto a depositar" className="moneyDep"/>
-                    <input type="submit" value="Enviar" className="dep-funds-submit"/>
+                    <input type="submit" value="Depositar" className="dep-funds-submit"/>
                 </form>
             </div>
-            <CancelButton/>
+            <MenuButton text="Cancelar"/>
         </div>
     );
 };

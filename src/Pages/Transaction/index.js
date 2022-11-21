@@ -1,4 +1,6 @@
 import React from 'react';
+import {MenuButton} from "../../Components/MenuButton";
+import {EndSesionButton} from "../../Components/EndSesionButton";
 import "./Transaction.css";
 
 const Transaction = () => {
@@ -18,7 +20,8 @@ const Transaction = () => {
               </div>
           </div>
           <div className="transaction__buttons">
-
+              <MenuButton text="Continuar"/>
+              <EndSesionButton />
           </div>
       </div>
   )

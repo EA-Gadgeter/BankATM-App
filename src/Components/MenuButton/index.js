@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './CancelButton.css';
+import './MenuButton.css';
 
-export const CancelButton = () => {
+export const MenuButton = (props) => {
   return (
     <Link to = '/menu' className = 'exit-button'>
-     <button>Cancelar</button>
+     <button>{props.text}</button>
     </Link>
   )
 }
