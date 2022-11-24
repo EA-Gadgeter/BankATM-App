@@ -1,27 +1,29 @@
 import React from "react";
 import {LogInForm} from "../Pages/LogInForm";
 import {MainMenu} from "../Pages/MainMenu";
-import {DepFunds} from "../Pages/DepFunds";
-import {TransferMenu} from "../Pages/TransferMenu";
+import {DepFonds} from "../Pages/DepFonds";
+import {Transfer} from "../Routes/Transfer";
 import {Transaction} from "../Pages/Transaction";
 import {WithDraw} from "../Pages/WithDraw";
-import {TransferFonds} from "../Pages/TransferFonds";
-import {CheckFunds} from "../Pages/CheckFunds";
+import {CheckFonds} from "../Pages/CheckFonds";
 import {Route, Routes} from "react-router-dom";
+
+import {AuthProvider} from "../Context/AuthContext";
 
 const App = () => {
     return(
-        <Routes>
-            <Route path="/" element={<LogInForm />}/>
-            <Route path="/menu" element={<MainMenu />}/>
-            <Route path="/dep-funds" element={<DepFunds />}/>
-            <Route path="/transfer-menu" element={<TransferMenu />}/>
-            <Route path="/transaction" element={<Transaction />}/>
-            <Route path="/withdraw" element={<WithDraw />}/>
-            <Route path="/transfer-fonds" element={<TransferFonds />}/>}
-            <Route path="/check-funds" element={<CheckFunds/>}/>
-            <Route path="*" element={<h1>Page Not Found</h1>}/>
-        </Routes>
+        <AuthProvider>
+            <Routes>
+                <Route path="/login" element={<LogInForm />}/>
+                <Route path="/menu" element={<MainMenu />}/>
+                <Route path="/check-fonds" element={<CheckFonds/>} />
+                <Route path="/dep-fonds" element={<DepFonds />}/>
+                <Route path="/transfer" element={<Transfer />}/>
+                <Route path="/withdraw" element={<WithDraw />}/>
+                <Route path="/transaction" element={<Transaction />}/>
+                <Route path="*" element={<h1>Page Not Found</h1>} />
+            </Routes>
+        </AuthProvider>
     );
 };
 
