@@ -17,17 +17,16 @@ const LogInForm = () => {
         setNIP(event.target.value);
     }
 
-    const onLogInFormSubmitted = (event) => {
+    const onLogInFormSubmitted = async (event) => {
         event.preventDefault();
-        serviceLogin(cardNumber, NIP)
-         .then(response => {
-             /*If Backend told us that everything is correct,
+        const loginResponse = await serviceLogin(cardNumber, NIP);
+        /*If Backend told us that everything is correct,
              we log in the page*/
-             if(response.shouldLogin) {
-                 const {idCuenta, tipoTarjeta} = response;
-                 login(idCuenta, cardNumber, tipoTarjeta);
-             } else alert("Tarjeta o NIP incorrectos");
-         });
+        if(loginResponse.shouldLogin) {
+            const {idCuenta, tipoTarjeta} = loginResponse;
+            login(idCuenta, cardNumber, tipoTarjeta);
+        } else alert("Tarjeta o NIP incorrectos");
+
     }
 
     return(
