@@ -3,26 +3,32 @@ import Cards from 'react-credit-cards'
 
 import {MenuButton} from "../../Components/MenuButton";
 import {ProtectedRoute} from "../../Components/ProtectedRoute";
+import {AuthContext} from "../../Context/AuthContext";
+import {UserContext} from "../../Context/UserContext";
 
 import "./CheckFunds.css";
-import 'react-credit-cards/es/styles-compiled.css'
+import 'react-credit-cards/es/styles-compiled.css';
 
 const CheckFonds = () => {
+
+    const {userLoginInfo} = React.useContext(AuthContext);
+    const {userName, userCardDateEnd, userFonds} = React.useContext(UserContext);
+    const {cardNumber} = userLoginInfo;
+
     return(
         <ProtectedRoute>
             <div className="check-funds-container">
                 <div className="card-container">
                     <Cards
-                        number={"1234123412341234"}
-                        name={"Sebastián Jácome"}
-                        expiry={"2010"}
-                        cvc={"1234"}
+                        number={cardNumber}
+                        name={userName}
+                        expiry={userCardDateEnd}
                         focus={"name"}
                     />
                 </div>
                 <div className="text-container">
                     <p>Saldo Disponible: </p>
-                    <p className="check-input">$1231239871</p>
+                    <p className="check-input">{`$${userFonds}`}</p>
                 </div>
                 <div className="button-container">
                     <div className="comprobante-button">
@@ -42,4 +48,4 @@ const CheckFonds = () => {
     );
 };
 
-export {CheckFonds}
+export {CheckFonds};
