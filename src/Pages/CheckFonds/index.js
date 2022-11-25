@@ -28,7 +28,7 @@ const CheckFonds = () => {
                 </div>
                 <div className="text-container">
                     <p>Saldo Disponible: </p>
-                    <p className="check-input">{$${userFonds}}</p>
+                    <p className="check-input">{`$${userFonds}`}</p>
                 </div>
                 <div className="button-container">
                     <div className="comprobante-button">
