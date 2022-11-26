@@ -2,6 +2,7 @@ import React from "react";
 import Cards from 'react-credit-cards'
 
 import {MenuButton} from "../../Components/MenuButton";
+import {EndSesionButton} from "../../Components/EndSesionButton";
 import {ProtectedRoute} from "../../Components/ProtectedRoute";
 import {AuthContext} from "../../Context/AuthContext";
 import {UserContext} from "../../Context/UserContext";
@@ -39,7 +40,7 @@ const CheckFonds = () => {
                         <MenuButton text="Continuar"/>
                     </div>
                     <div className="menu-button">
-                        <button>Salir</button>
+                        <EndSesionButton />
                     </div>
 
                 </div>
