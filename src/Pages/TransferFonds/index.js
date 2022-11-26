@@ -1,8 +1,47 @@
 import React from "react";
+
 import {MenuButton} from "../../Components/MenuButton";
+import {useNavigate} from "react-router-dom";
+
+import {serviceTransfer} from "../../Services/serviceTransfer";
+
+import {UserContext} from "../../Context/UserContext";
+import {AuthContext} from "../../Context/AuthContext";
+
 import "./TransferFonds.css";
 
-const TransferFonds = () => {
+const TransferFonds = ({transferToUser}) => {
+
+    const [transferFonds, setTransferFonds] = React.useState("");
+    const {userFonds, setUserFonds} = React.useContext(UserContext);
+    const {userLoginInfo: {idAccount}} = React.useContext(AuthContext);
+    const returnMenu = useNavigate();
+
+    const onChangeTransferFonds = (event) => {
+        setTransferFonds(event.target.value);
+    };
+
+    const onSubmitTransfer = (event) => {
+        event.preventDefault();
+        if (transferFonds > 0) {
+            serviceTransfer(idAccount, transferToUser, transferFonds)
+                .then(response => {
+                    const {transferSuccesful, validMoney} = response;
+
+                    if(!transferSuccesful && !validMoney) {
+                        alert("No tienes suficientes fondos, ingresa otra cantidad porfavor.")
+                    } else if(!transferSuccesful && validMoney) {
+                        alert("Lo sentimos, no se pudo realiza la transferencia, intentalo más tarde.")
+                    }
+                    else if(transferSuccesful && validMoney) {
+                        alert("Transferencia realizada con exito.")
+                        setUserFonds(Number(userFonds) - Number(transferFonds));
+                        returnMenu("/menu");
+                    }
+                });
+        }
+    };
+
     return(
         <div className="transferFonds">
             <div className="transferFonds__cancel">
@@ -10,11 +49,15 @@ const TransferFonds = () => {
             </div>
             <div className="transferFonds__info">
                 <p>Saldo Actual</p>
-                <p>$ 999,999,999.00</p>
+                <p>{`$${userFonds}`}</p>
             </div>
             <div className="transferFonds__form">
-                <form>
-                    <input type="number" placeholder="$ ..."/>
+                <form onSubmit={onSubmitTransfer}>
+                    <input type="number"
+                           placeholder="$ ..." min="0"
+                           onChange={onChangeTransferFonds}
+                           value={transferFonds}
+                    />
                     <button type="submit">Transferir</button>
                 </form>
             </div>

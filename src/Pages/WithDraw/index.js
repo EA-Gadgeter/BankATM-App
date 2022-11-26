@@ -2,10 +2,12 @@ import React from "react";
 
 import {MenuButton} from "../../Components/MenuButton";
 import {ProtectedRoute} from "../../Components/ProtectedRoute";
+import {useNavigate} from "react-router-dom";
+
 import {serviceWithdraw} from "../../Services/serviceWithdraw";
+
 import {UserContext} from "../../Context/UserContext";
 import {AuthContext} from "../../Context/AuthContext";
-import {useNavigate} from "react-router-dom";
 
 import "./WithDraw.css";
 
@@ -31,7 +33,7 @@ const WithDraw = () => {
                     if(!withdrawSuccesful && !validMoney) {
                         alert("No tienes suficientes fondos, ingresa otra cantidad porfavor.")
                     } else if(!withdrawSuccesful && validMoney) {
-                        alert("Lo sentimos, no se pudo realiza el retiro, intentalo más tarde.")
+                        alert("Lo sentimos, no se pudo realizar el retiro, intentalo más tarde.")
                     }
                     else if(withdrawSuccesful && validMoney) {
                         alert("Porfavor, retire su dinero.")
