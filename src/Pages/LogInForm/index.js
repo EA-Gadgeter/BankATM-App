@@ -1,13 +1,17 @@
 import React from "react";
-import "./LogInForm.css";
+
 import {serviceLogin} from "../../Services/serviceLogin";
+import {serviceBlockCard} from "../../Services/serviceBlockCard";
 import {AuthContext} from "../../Context/AuthContext";
+
+import "./LogInForm.css";
 
 const LogInForm = () => {
 
     const [cardNumber, setCardNumber] = React.useState("");
     const [NIP, setNIP] = React.useState("");
     const {login} = React.useContext(AuthContext);
+    let intentos = 0;
 
     const cardNumberOnChange = (event) => {
         setCardNumber(event.target.value);
@@ -25,8 +29,27 @@ const LogInForm = () => {
         if(loginResponse.shouldLogin) {
             const {idCuenta, tipoTarjeta} = loginResponse;
             login(idCuenta, cardNumber, tipoTarjeta);
-        } else alert("Tarjeta o NIP incorrectos");
-
+        } else {
+            // Checking if the card is blocked
+            if(loginResponse.cardBlocked) {
+                alert("Tu tarjeta esta bloqueada, porfavor contacta a soporte a cliente para desbloquearla.");
+            } else if (loginResponse.badInfo) { // If not, checking if was a bad NIP to the valid card
+                alert("Tarjeta o NIP incorrectos.");
+                intentos++;
+                // When we reach 3 tries, we block de card
+                if (intentos >= 3) {
+                    serviceBlockCard(cardNumber)
+                     .then(response => {
+                         if (response.cardBlocked) {
+                             alert("Se equivoco 3 veces en ingresar a su cuenta. Por motivos de seguridad" +
+                                 " la tajeta a sido bloqueada, porfavor contacta a soporte a cliente para desbloquearla.");
+                         }
+                    })
+                }
+            } else { // If the card does not even exist, we just show invalid info message
+                alert("Tarjeta o NIP incorrectos.");
+            }
+        }
     }
 
     return(

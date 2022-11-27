@@ -34,7 +34,6 @@ const CheckFonds = () => {
                 <div className="button-container">
                     <div className="comprobante-button">
                         <button>Imprimir</button>
-
                     </div>
                     <div className="exit-button">
                         <MenuButton text="Continuar"/>

@@ -5,7 +5,6 @@ import '../MenuButton/MenuButton.css';
 // Ocupa los estilos de MenuButton
 export const EndSesionButton = () => {
 
-
     const {logout} = React.useContext(AuthContext);
 
     return (
