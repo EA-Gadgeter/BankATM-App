@@ -24,7 +24,7 @@ const App = () => {
                     <Route path="/dep-fonds" element={<DepFonds />}/>
                     <Route path="/transfer" element={<Transfer />}/>
                     <Route path="/withdraw" element={<WithDraw />}/>
-                    <Route path="/transaction" element={<Transaction />}/>
+                    <Route path="/transaction/:idTransaction" element={<Transaction />}/>
                     <Route path="*" element={<h1>Page Not Found</h1>} />
                 </Routes>
             </UserProvider>

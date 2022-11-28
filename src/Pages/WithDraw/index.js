@@ -6,6 +6,8 @@ import {useNavigate} from "react-router-dom";
 
 import {serviceWithdraw} from "../../Services/serviceWithdraw";
 
+import {randomIDGenerator} from "../../Helpers/randomIDGenerator";
+
 import {UserContext} from "../../Context/UserContext";
 import {AuthContext} from "../../Context/AuthContext";
 
@@ -16,7 +18,7 @@ const WithDraw = () => {
     const {userFonds, setUserFonds} = React.useContext(UserContext);
     const {userLoginInfo: {idAccount}} = React.useContext(AuthContext);
     const [fondsToDraw, setFondsToDraw] = React.useState("");
-    const returnMenu = useNavigate();
+    const toTransactions = useNavigate();
 
 
     const fondsOnChange = (event) => {
@@ -37,8 +39,19 @@ const WithDraw = () => {
                     }
                     else if(withdrawSuccesful && validMoney) {
                         alert("Porfavor, retire su dinero.")
-                        setUserFonds(Number(userFonds) - Number(fondsToDraw));
-                        returnMenu("/menu");
+                        const oldFonds = userFonds;
+                        const idTransaction = randomIDGenerator(20);
+                        const newUserFonds = Number(userFonds) - Number(fondsToDraw);
+                        setUserFonds(newUserFonds);
+                        toTransactions(`/transaction/${idTransaction}`, {
+                            state: {
+                                transactionType: "Retiro",
+                                oldFonds,
+                                newUserFonds,
+                                fondsChange: -fondsToDraw,
+                                idAccount,
+                            },
+                        });
                     }
                 });
         }

@@ -27,8 +27,8 @@ const LogInForm = () => {
         /*If Backend told us that everything is correct,
              we log in the page*/
         if(loginResponse.shouldLogin) {
-            const {idCuenta, tipoTarjeta} = loginResponse;
-            login(idCuenta, cardNumber, tipoTarjeta);
+            const {idCuenta, tipoTarjeta, randomATM} = loginResponse;
+            login(idCuenta, cardNumber, tipoTarjeta, randomATM);
         } else {
             // Checking if the card is blocked
             if(loginResponse.cardBlocked) {
@@ -37,7 +37,7 @@ const LogInForm = () => {
                 alert("Tarjeta o NIP incorrectos.");
                 intentos++;
                 // When we reach 3 tries, we block de card
-                if (intentos >= 3) {
+                if (intentos === 3) {
                     serviceBlockCard(cardNumber)
                      .then(response => {
                          if (response.cardBlocked) {
@@ -46,7 +46,7 @@ const LogInForm = () => {
                          }
                     })
                 }
-            } else { // If the card does not even exist, we just show invalid info message
+            } else { // If the card does not even exist, we just show invalid info message.
                 alert("Tarjeta o NIP incorrectos.");
             }
         }

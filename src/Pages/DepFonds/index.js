@@ -10,13 +10,14 @@ import {AuthContext} from "../../Context/AuthContext";
 import {UserContext} from "../../Context/UserContext";
 
 import "./DepFunds.css";
+import {randomIDGenerator} from "../../Helpers/randomIDGenerator";
 
 const DepFonds = () =>{
 
     const [depPayFonds, setDepPayFonds] = React.useState("");
     const {userLoginInfo: {idAccount, cardType}} = React.useContext(AuthContext);
     const {setUserFonds, userFonds} = React.useContext(UserContext);
-    const returnMenu = useNavigate();
+    const navigate = useNavigate();
 
     const onChangeDepPayFonds = (event) => {
         setDepPayFonds(event.target.value);
@@ -34,7 +35,7 @@ const DepFonds = () =>{
                         } else {
                             alert("Deposito realizado con exito.");
                             setUserFonds(Number(userFonds) + Number(depPayFonds));
-                            returnMenu("/menu");
+                            navigate("/menu");
                         }
                     }
                     else if(cardType === "credito") {
@@ -42,15 +43,26 @@ const DepFonds = () =>{
 
                         if (depPaySuccesful && validMoney && noToPayFonds) {
                             alert("No tienes pagos pendientes en tu corte mensual.");
-                            returnMenu("/menu");
+                            navigate("/menu");
                         } else if(!depPaySuccesful && validMoney) {
                             alert("Lo sentimos, no se pudo realizar el pago, intentalo más tarde.")
                         } else if(!depPaySuccesful && !validMoney) {
                             alert("No tienes suficientes fondos, ingresa otra cantidad porfavor.")
                         } else if(depPaySuccesful && validMoney) {
                             alert("Pago al corte mensual realizado con exito.");
+                            const oldFonds = userFonds;
+                            const idTransaction = randomIDGenerator(20);
+                            const newUserFonds = Number(userFonds) - Number(depPayFonds);
                             setUserFonds(newUserFonds);
-                            returnMenu("/menu");
+                            navigate(`/transaction/${idTransaction}`, {
+                                state: {
+                                    transactionType: "Pago Corte Mensual",
+                                    oldFonds,
+                                    newUserFonds,
+                                    fondsChange: -depPayFonds,
+                                    idAccount,
+                                },
+                            });
                         }
                     }
                 })

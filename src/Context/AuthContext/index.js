@@ -11,9 +11,9 @@ const AuthProvider = ({ children }) => {
 
     // Function to be called when the user logged in successfully
     // set userLoginInfo with all the basic information we need
-    const login = (idAccount, cardNumber, cardType) => {
+    const login = (idAccount, cardNumber, cardType, idATM) => {
         setIsAuthenticated(true);
-        setUserLoginInfo({idAccount, cardNumber, cardType});
+        setUserLoginInfo({idAccount, cardNumber, cardType, idATM});
         // Redirecting the user to the menu
         navigateLogin("/menu");
     };

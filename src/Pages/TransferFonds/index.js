@@ -9,13 +9,14 @@ import {UserContext} from "../../Context/UserContext";
 import {AuthContext} from "../../Context/AuthContext";
 
 import "./TransferFonds.css";
+import {randomIDGenerator} from "../../Helpers/randomIDGenerator";
 
 const TransferFonds = ({transferToUser}) => {
 
     const [transferFonds, setTransferFonds] = React.useState("");
     const {userFonds, setUserFonds} = React.useContext(UserContext);
     const {userLoginInfo: {idAccount}} = React.useContext(AuthContext);
-    const returnMenu = useNavigate();
+    const toTransactions = useNavigate();
 
     const onChangeTransferFonds = (event) => {
         setTransferFonds(event.target.value);
@@ -35,8 +36,19 @@ const TransferFonds = ({transferToUser}) => {
                     }
                     else if(transferSuccesful && validMoney) {
                         alert("Transferencia realizada con exito.")
-                        setUserFonds(Number(userFonds) - Number(transferFonds));
-                        returnMenu("/menu");
+                        const oldFonds = userFonds;
+                        const idTransaction = randomIDGenerator(20);
+                        const newUserFonds = Number(userFonds) - Number(transferFonds);
+                        setUserFonds(newUserFonds);
+                        toTransactions(`/transaction/${idTransaction}`, {
+                            state: {
+                                transactionType: "Transferencia",
+                                oldFonds,
+                                newUserFonds,
+                                fondsChange: -transferFonds,
+                                idAccount,
+                            },
+                        });
                     }
                 });
         }

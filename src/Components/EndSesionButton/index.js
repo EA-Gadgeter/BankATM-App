@@ -8,6 +8,8 @@ export const EndSesionButton = () => {
     const {logout} = React.useContext(AuthContext);
 
     return (
-        <button className = 'leave-button' onClick={logout}>Salir</button >
+        <div className="leave-button">
+            <button onClick={logout}>Salir</button >
+        </div>
     )
 }
