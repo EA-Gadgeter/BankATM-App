@@ -52,7 +52,6 @@ const DepFonds = () =>{
                             alert("Pago al corte mensual realizado con exito.");
                             const oldFonds = userFonds;
                             const idTransaction = randomIDGenerator(20);
-                            const newUserFonds = Number(userFonds) - Number(depPayFonds);
                             setUserFonds(newUserFonds);
                             navigate(`/transaction/${idTransaction}`, {
                                 state: {

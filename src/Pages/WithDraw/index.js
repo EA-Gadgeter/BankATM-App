@@ -16,7 +16,7 @@ import "./WithDraw.css";
 const WithDraw = () => {
 
     const {userFonds, setUserFonds} = React.useContext(UserContext);
-    const {userLoginInfo: {idAccount}} = React.useContext(AuthContext);
+    const {userLoginInfo: {idAccount, cardType}} = React.useContext(AuthContext);
     const [fondsToDraw, setFondsToDraw] = React.useState("");
     const toTransactions = useNavigate();
 
@@ -28,31 +28,54 @@ const WithDraw = () => {
     const withdrawSubmitted = (event) => {
         event.preventDefault();
         if (fondsToDraw > 0) {
-            serviceWithdraw(idAccount, fondsToDraw)
+            serviceWithdraw(idAccount, fondsToDraw, cardType)
                 .then(response => {
-                    const {withdrawSuccesful, validMoney} = response;
+                    const {withdrawSuccesful, validMoney, fromBank} = response;
 
-                    if(!withdrawSuccesful && !validMoney) {
-                        alert("No tienes suficientes fondos, ingresa otra cantidad porfavor.")
-                    } else if(!withdrawSuccesful && validMoney) {
-                        alert("Lo sentimos, no se pudo realizar el retiro, intentalo más tarde.")
+                    if(!fromBank) {
+                        if(!withdrawSuccesful && !validMoney) {
+                            alert("No tienes suficientes fondos, ingresa otra cantidad porfavor.")
+                        } else if(!withdrawSuccesful && validMoney) {
+                            alert("Lo sentimos, no se pudo realizar el retiro, intentalo más tarde.")
+                        }
+                        else if(withdrawSuccesful && validMoney) {
+                            alert("Porfavor, retire su dinero.")
+                            const oldFonds = userFonds;
+                            const idTransaction = randomIDGenerator(20);
+                            const newUserFonds = Number(userFonds) - Number(fondsToDraw);
+                            setUserFonds(newUserFonds);
+                            toTransactions(`/transaction/${idTransaction}`, {
+                                state: {
+                                    transactionType: "Retiro-Debito",
+                                    oldFonds,
+                                    newUserFonds,
+                                    fondsChange: -fondsToDraw,
+                                    idAccount,
+                                },
+                            });
+                        }
+                    } else {
+                        if(!withdrawSuccesful && !validMoney) {
+                            alert("No puedes retirar más de 5000, porfavor ingresa otra cantidad.")
+                        } else if(!withdrawSuccesful && validMoney) {
+                            alert("Lo sentimos, no se pudo realizar el retiro, intentalo más tarde.")
+                        }
+                        else if(withdrawSuccesful && validMoney) {
+                            alert("Porfavor, retire su dinero.")
+                            const idTransaction = randomIDGenerator(20);
+                            toTransactions(`/transaction/${idTransaction}`, {
+                                state: {
+                                    transactionType: "Retiro-Credito",
+                                    oldFonds: userFonds,
+                                    newUserFonds: userFonds,
+                                    fondsChange: 0,
+                                    idAccount,
+                                },
+                            });
+                        }
                     }
-                    else if(withdrawSuccesful && validMoney) {
-                        alert("Porfavor, retire su dinero.")
-                        const oldFonds = userFonds;
-                        const idTransaction = randomIDGenerator(20);
-                        const newUserFonds = Number(userFonds) - Number(fondsToDraw);
-                        setUserFonds(newUserFonds);
-                        toTransactions(`/transaction/${idTransaction}`, {
-                            state: {
-                                transactionType: "Retiro",
-                                oldFonds,
-                                newUserFonds,
-                                fondsChange: -fondsToDraw,
-                                idAccount,
-                            },
-                        });
-                    }
+
+
                 });
         }
     };

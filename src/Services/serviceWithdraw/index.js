@@ -1,12 +1,12 @@
 const localhostServer = "http://localhost:6969";
 const withdrawPath = "withdraw";
 
-export const serviceWithdraw = async (idAccount, restFonds) => {
+export const serviceWithdraw = async (idAccount, restFonds, cardType) => {
     try {
         const res = await fetch(`${localhostServer}/${withdrawPath}`, {
             headers: {"Content-Type": "application/json; charset=UTF-8"},
             method: "PUT",
-            body: JSON.stringify({idAccount, restFonds}),
+            body: JSON.stringify({idAccount, restFonds, cardType}),
         });
 
         let resJson = await res.json();
